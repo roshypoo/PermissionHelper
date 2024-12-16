@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity{
             }
 
             @Override
-            public void onPermissionRejectedManyTimes(List<String> rejectedPerms, int request_code) {
+            public void onPermissionRejectedManyTimes(@NonNull List<String> rejectedPerms, int request_code) {
                 String s="";
                 for(String perms:rejectedPerms)
                 {

@@ -44,8 +44,8 @@ public class PermissionHelper {
 
     private PermissionsListener pListener;
 
-    private List<String> deniedpermissions = new ArrayList<>();
-    private List<String> granted = new ArrayList<>();
+    private final List<String> deniedpermissions = new ArrayList<>();
+    private final List<String> granted = new ArrayList<>();
 
     public PermissionHelper(Activity view) {
         this.activity_view = new WeakReference<Activity>(view);
@@ -139,7 +139,7 @@ public class PermissionHelper {
             String res=permission_name.toString();
             deniedpermissions.removeAll(granted);
 
-            if (deniedpermissions.size() > 0) {
+            if (!deniedpermissions.isEmpty()) {
                 res = res.substring(1);
                 if (!never_ask_again) {
                     getRequestAgainAlertDialog(getActivity(), res,requestCode);
@@ -152,8 +152,8 @@ public class PermissionHelper {
         }
     }
 
-    private AlertDialog goToSettingsAlertDialog(final Activity view, String permission_name, final int request_code) {
-        return new AlertDialog.Builder(view).setTitle("Permission Required").setMessage("We need " + permission_name + " permissions")
+    private void goToSettingsAlertDialog(final Activity view, String permission_name, final int request_code) {
+        new AlertDialog.Builder(view).setTitle("Permission Required").setMessage("We need " + permission_name + " permissions")
                 .setPositiveButton("GO TO SETTINGS", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -174,8 +174,8 @@ public class PermissionHelper {
                 }).show();
     }
 
-    private AlertDialog getRequestAgainAlertDialog(Activity view, String permission_name, final int request_code) {
-        return new AlertDialog.Builder(view).setTitle("Permission Required")
+    private void getRequestAgainAlertDialog(Activity view, String permission_name, final int request_code) {
+        new AlertDialog.Builder(view).setTitle("Permission Required")
                 .setMessage("We need " + permission_name + " permissions")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
